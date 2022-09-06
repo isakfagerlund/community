@@ -4,7 +4,7 @@
 
 import express, { Request, Response } from 'express';
 import * as PeopleService from './people.service';
-import { BasePerson, Person } from './person.interface';
+import { Person } from './person.interface';
 
 /**
  * Router Definition
@@ -25,7 +25,7 @@ peopleRouter.get('/', async (req: Request, res: Response) => {
     console.log(people)
 
     res.status(200).send(people);
-  } catch (e) {
+  } catch (e: any) {
     res.status(500).send(e.message);
   }
 });
@@ -44,7 +44,7 @@ peopleRouter.get('/:id', async (req: Request, res: Response) => {
     }
 
     res.status(404).send('Person was not found');
-  } catch (e) {
+  } catch (e: any) {
     res.status(500).send(e.message);
   }
 });
@@ -59,7 +59,7 @@ peopleRouter.post('/', async (req: Request, res: Response) => {
     const newPerson = await PeopleService.create(person);
 
     res.status(201).send(newPerson);
-  } catch (e) {
+  } catch (e: any) {
     res.status(500).send(e.message);
   }
 });
@@ -83,7 +83,7 @@ peopleRouter.put('/:id', async (req: Request, res: Response) => {
     const newPerson = await PeopleService.create(personUpdate);
 
     res.status(201).json(newPerson);
-  } catch (e) {
+  } catch (e: any) {
     res.status(500).send(e.message);
   }
 });
@@ -97,7 +97,7 @@ peopleRouter.delete('/:id', async (req: Request, res: Response) => {
     await PeopleService.remove(id);
 
     res.sendStatus(204);
-  } catch (e) {
+  } catch (e: any) {
     res.status(500).send(e.message);
   }
 });
